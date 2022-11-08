@@ -18,7 +18,8 @@ def en_file(filename,salt,key):
 
     cipher = AES.new(key, AES.MODE_GCM)  # Create a cipher object to encrypt data
     file_out.write(cipher.nonce)  # Write out the nonce to the output file under the salt
-    #print(cipher.nonce)
+    print("The nonce of AES-GCM is :",(cipher.nonce).hex())
+    print("The key of AES-GCM is :",key.hex())
 # Read, encrypt and write the data
     data = file_in.read(BUFFER_SIZE)  # Read in some of the file
     while len(data) != 0:  # Check if we need to encrypt anymore data

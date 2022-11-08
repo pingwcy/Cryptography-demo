@@ -3,7 +3,7 @@ import Sloth_Guider
 import Sloth_Checker
 def ini():
     print("Welcome to Sloth encrypt system, please select your algorithm first")
-    print("In order to ensure the security, we only provide AES-GCM and ChaCha20_Poly1305")
+    print("In order to ensure the security, we only provide AES-GCM and ChaCha20_Poly1305, and only 256-bits key.")
     print("Additionally, we use scrypt as key generator")
     print("Please enter 1 for AES-GCM and 2 for ChaCha20_Poly1305, keep same choice when decryption")
     alg = input("Your choice: ")

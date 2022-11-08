@@ -13,7 +13,8 @@ def en_file_menu(alg):
     if pwdtyp == "1":
         key = input("Enter your own 32 length key: \n")
         salt = get_random_bytes(32)  # Generate salt
-        key = Sloth_PasswordGen.helpkey(userpwd,salt)
+        key = bytes(key, 'utf-8')
+        #key = Sloth_PasswordGen.helpkey(userpwd,salt)
         if alg == "1":
             Sloth_AES.en_file(filename,salt,key)
         elif alg == "2":
@@ -24,12 +25,12 @@ def en_file_menu(alg):
         t1 = time.perf_counter()
         key = Sloth_PasswordGen.helpkey(userpwd,salt)
         t2 = time.perf_counter()
-        print("The key is:",key,"\nCost time",t2-t1)
+        print("Generate key cost time",t2-t1)
         if alg == "1":
             t1 = time.perf_counter()
             Sloth_AES.en_file(filename,salt,key)
             t2 = time.perf_counter()
-            print("Completed, cost time",t2-t1)
+            print("Completed, encryption cost time",t2-t1)
         elif alg == "2":
             Sloth_ChaCha.en_file(filename,salt,key)
 def en_msg_menu(alg):
@@ -42,10 +43,10 @@ def de_file_menu(alg):
     if pwdtyp == "1":
         key = input("Enter your own 32 length key: \n")
         if alg == "1":
-            key = Sloth_PasswordGen.helpkey(userpwd,salt)
+            key = bytes(key, 'utf-8')
             Sloth_AES.de_file(filename,key)
         elif alg == "2":
-            key = Sloth_PasswordGen.helpkey(userpwd,salt)
+            key = bytes(key, 'utf-8')
             Sloth_ChaCha.de_file(filename,key)
     else:
         userpwd = input("Enter your password: \n")
