@@ -2,7 +2,7 @@ import os
 import hashlib
 
 def get_file_checksum(filename):
-    chunk_size = 8096
+    chunk_size = 8192
 
     md5 = hashlib.md5()
     sha256 = hashlib.sha256()
