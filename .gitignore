@@ -1,2 +1,3 @@
 Release/
 AES_File_Encryption/__pycache__
+*.rsa
