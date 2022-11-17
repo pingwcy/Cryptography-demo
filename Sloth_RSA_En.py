@@ -2,7 +2,7 @@ from Crypto.PublicKey import RSA
 from Crypto.Cipher import PKCS1_v1_5
 from Crypto.Signature import PKCS1_v1_5 as sign_PKCS
 import base64
-from Crypto.Hash import SHA256
+from Crypto.Hash import SHA3_512
 def menu():
     print("1.Generate New key pair and save to file")
     print("2.Import myself key pair")
@@ -58,7 +58,7 @@ def main():
             print(encmsg)
             save = input("Do you want to save it in a file? Y/N\n")
             if save == "Y":
-                name = input("Input file name to store")
+                name = input("Input file name to store:\n")
                 try:
                     with open(name,'w') as file:
                         file.write(encmsg)
@@ -72,7 +72,7 @@ def main():
                 print(singa)
             saves = input("Do you want to save it in a file? Y/N\n")
             if saves == "Y":
-                name = input("Input file name to store")
+                name = input("Input file name to store:\n")
                 try:
                     with open(name,'w') as file:
                         file.write(singa)
@@ -81,7 +81,13 @@ def main():
                     print("Save fail")
 
         elif choice == "5":
-            encmsg = input("What encrypted message you want to decrypt?\n")
+            isfile = input("Do you want to input or by file? 1 for input, 2 for file \n")
+            if isfile == "2":
+                fnm = input("Input file name:\n")
+                with open(fnm) as fb:
+                    encmsg = fb.read()
+            else:
+                encmsg = input("What encrypted message you want to decrypt?\n")
             key = pri_key
             try:
                 decmsg = dec(encmsg,key)
@@ -99,6 +105,8 @@ def main():
                     singa = input("Input sigature:\n")
                 if who == "1":
                     result = check(pub_key,decmsg,singa)
+                else:
+                    result = check(ano_pub_key,decmsg,singa)
                 print(result)
         elif choice == "0":
             break
@@ -151,13 +159,13 @@ def dec(encmsg,key):
     return back_text.decode('utf-8')
 def tosign(message,key):
     singobj = sign_PKCS.new(key)
-    sha = SHA256.new()
+    sha = SHA3_512.new()
     sha.update(message.encode())
     signa = base64.b64encode(singobj.sign(sha))
     return signa.decode('utf8')
 def check(key,message,singa):
     checkobj = sign_PKCS.new(key)
-    sha = SHA256.new()
+    sha = SHA3_512.new()
     sha.update(message.encode())
     result = checkobj.verify(sha,base64.b64decode(singa))
     return result
