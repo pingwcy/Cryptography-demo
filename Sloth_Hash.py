@@ -12,7 +12,7 @@ class radiobutton:
         root = Tk()
         root.title("树懒哈希计算器")  # 设置窗口标题
         root.geometry("1024x650")  # 设置窗口大小
-        
+
         # 选择哈希算法
         self.CheckVar1 = IntVar()
         self.CheckVar2 = IntVar()
@@ -94,8 +94,10 @@ class radiobutton:
         root.mainloop()
 
     def filesize(content):
-        fsize = os.path.getsize(content)    
-        return round(fsize/chunk_size)
+        fsize = os.path.getsize(content)
+        rtn = round(fsize/chunk_size)
+        if rtn<1: rtn=rtn+1
+        return rtn
 
 
     def Md5(self,typ,content):
@@ -109,8 +111,9 @@ class radiobutton:
                 while True:
                     if stopupdate ==0:
                         progress1+=1
-                        if progress1/rounds*1000-self.bar['value']>100: self.bar['value']=progress1/rounds*1000
-                        self.bar.update()
+                        if progress1/rounds*1000-self.bar['value']>100: 
+                            self.bar['value']=progress1/rounds*1000
+                            self.bar.update()
                     chunk = f.read(chunk_size)
                     if len(chunk) == 0:
                         self.bar['value']=1000
@@ -130,8 +133,9 @@ class radiobutton:
                 while True:
                     if stopupdate ==0:
                         progress1+=1
-                        if progress1/rounds*1000-self.bar['value']>100: self.bar['value']=progress1/rounds*1000
-                        self.bar.update()
+                        if progress1/rounds*1000-self.bar['value']>100: 
+                            self.bar['value']=progress1/rounds*1000
+                            self.bar.update()
                     chunk = f.read(chunk_size)
                     if len(chunk) == 0:
                         self.bar['value']=1000
@@ -151,8 +155,9 @@ class radiobutton:
                 while True:
                     if stopupdate ==0:
                         progress1+=1
-                        if progress1/rounds*1000-self.bar['value']>100: self.bar['value']=progress1/rounds*1000
-                        self.bar.update()
+                        if progress1/rounds*1000-self.bar['value']>100: 
+                            self.bar['value']=progress1/rounds*1000
+                            self.bar.update()
                     chunk = f.read(chunk_size)
                     if len(chunk) == 0:
                         self.bar['value']=1000
@@ -172,8 +177,9 @@ class radiobutton:
                 while True:
                     if stopupdate ==0:
                         progress1+=1
-                        if progress1/rounds*1000-self.bar['value']>100: self.bar['value']=progress1/rounds*1000
-                        self.bar.update()
+                        if progress1/rounds*1000-self.bar['value']>100: 
+                            self.bar['value']=progress1/rounds*1000
+                            self.bar.update()
                     chunk = f.read(chunk_size)
                     if len(chunk) == 0:
                         self.bar['value']=1000
@@ -192,8 +198,9 @@ class radiobutton:
                 while True:
                     if stopupdate ==0:
                         progress1+=1
-                        if progress1/rounds*1000-self.bar['value']>100: self.bar['value']=progress1/rounds*1000
-                        self.bar.update()
+                        if progress1/rounds*1000-self.bar['value']>100: 
+                            self.bar['value']=progress1/rounds*1000
+                            self.bar.update()
                     chunk = f.read(chunk_size)
                     if len(chunk) == 0:
                         self.bar['value']=1000
@@ -213,8 +220,9 @@ class radiobutton:
                 while True:
                     if stopupdate ==0:
                         progress1+=1
-                        if progress1/rounds*1000-self.bar['value']>100: self.bar['value']=progress1/rounds*1000
-                        self.bar.update()
+                        if progress1/rounds*1000-self.bar['value']>100: 
+                            self.bar['value']=progress1/rounds*1000
+                            self.bar.update()
                     chunk = f.read(chunk_size)
                     if len(chunk) == 0:
                         self.bar['value']=1000
@@ -314,6 +322,7 @@ class radiobutton:
             global name
             name = filename
             self.all_alg2.config(text=name)
+            #self.iv_direction.set(2)
     def function3(self):
         self.te.config(state=NORMAL)
         self.te.delete(1.0,END)
