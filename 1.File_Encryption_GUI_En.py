@@ -5,7 +5,7 @@ from Crypto.Cipher import AES
 import os
 from Crypto.Cipher import ChaCha20_Poly1305
 from Crypto.Protocol.KDF import scrypt
-
+import tkinter.messagebox
 def helpkey(password,salt):
     key = scrypt(password, salt, key_len=32, N=2**20, r=8, p=1)  # Generate a key using the password and salt
     return key
@@ -298,6 +298,7 @@ class radiobutton:
  
     def function1(self):
         Gui_Guider(algg,direction,upwd,name)
+        tkinter.messagebox.showinfo("提示","加解密处理完成")
         #print("算法",algg,"方向",direction,"密码",upwd,"文件",name)
     def function2(self):
         filename = tkinter.filedialog.askopenfilename()

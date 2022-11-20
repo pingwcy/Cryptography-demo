@@ -1,3 +1,9 @@
 Release/
 AES_File_Encryption/__pycache__
 *.rsa
+1
+2
+B
+*.txt
+try.py
+*.pyc
