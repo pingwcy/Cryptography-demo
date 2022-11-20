@@ -112,7 +112,7 @@ class radiobutton:
         self.rb_direction_Label = Label(root, text='选择计算对象类型：',font=('微软雅黑', 15,'bold'))
         self.rb_direction1 = Radiobutton(root, text='字符串哈希', font=('微软雅黑', 15,'bold'),value=1, variable=self.iv_direction)
         self.rb_direction2 = Radiobutton(root, text='文件哈希', font=('微软雅黑', 15,'bold'),value=2, variable=self.iv_direction)
-
+        self.iv_direction.set(2)
         self.iv_password = IntVar()
         self.rb_password_Label = Label(root, text='输入要计算的字符串：',font=('微软雅黑', 15,'bold'))
         self.rb_password1 = Entry(root,width=80)
@@ -128,10 +128,12 @@ class radiobutton:
         # 启动按钮
         self.iv_start = IntVar()
         self.rb_start = Button(root, text='开始计算', font=('微软雅黑', 15,'bold'), command=self.function1)
+        self.clean = Button(root,text='清空输出框', font=('微软雅黑', 15,'bold'), command=self.function3)
         #总结标签
-        self.te = Text(root,height=15,width=120)
-
-
+        self.te = Text(root,height=15,width=120,state=DISABLED)
+        self.scr = Scrollbar(root)
+        self.te.config(yscrollcommand=self.scr.set)
+        self.scr.config(command=self.te.yview)
         '''grid布局'''
         self.rb_alg_Label.grid(row=2, column=0, sticky='E')
         self.check1.grid(row=2, column=1, sticky='W')
@@ -155,11 +157,15 @@ class radiobutton:
         self.all_alg2.grid(row=6, column=1, columnspan=99, sticky='W')
 
         self.rb_start.grid(row=7, column=4, sticky='W')
-
+        self.clean.grid(row=7, column=2, sticky='W')
         self.te.grid(row=8, column=0, columnspan=7, sticky='E')
+        self.scr.grid(row=8,column=9,sticky=N+S)
         root.mainloop()
  
     def function1(self):
+        self.te.config(state=NORMAL)
+        before = self.te.get(1.0,END)
+        self.te.delete(1.0,END)
         a,b,c,d,e,f=0,0,0,0,0,0
         a = self.CheckVar1.get()
         b = self.CheckVar2.get()
@@ -170,83 +176,84 @@ class radiobutton:
         typ = self.iv_direction.get()
         if typ == 1:
             content = self.rb_password1.get()
+            self.te.insert(1.0,"---------------"+str(content)+"计算结果----------------\n")
             if a == 1:
                 value=Md5(typ,str(content))
-                value = value+"\n"
-                self.te.insert(1.0,value)
+                self.te.insert(2.0,'MD5值为：')
+                value = value+"\n\n"
+                self.te.insert(3.0,value)
             if b == 1:
                 value=Sha1(typ,str(content))
-                value = value+"\n"
-                self.te.insert(2.0,value)
+                self.te.insert(4.0,'Sha1值为：')
+                value = value+"\n\n"
+                self.te.insert(5.0,value)
             if c == 1:
                 value=Sha256(typ,str(content))
-                value = value+"\n"
-                self.te.insert(3.0,value)
+                self.te.insert(6.0,'Sha256值为：')
+                value = value+"\n\n"
+                self.te.insert(7.0,value)
             if d == 1:
                 value=Sha512(typ,str(content))
-                value = value+"\n"
-                self.te.insert(4.0,value)
+                self.te.insert(8.0,'Sha512值为：')
+                value = value+"\n\n"
+                self.te.insert(9.0,value)
             if e == 1:
                 value=Sha3256(typ,str(content))
-                value = value+"\n"
-                self.te.insert(5.0,value)
+                self.te.insert(10.0,'Sha3_256值为：')
+                value = value+"\n\n"
+                self.te.insert(11.0,value)
             if f == 1:
                 value=Sha3512(typ,str(content))
-                value = value+"\n"
-                self.te.insert(6.0,value)
+                self.te.insert(12.0,'Sha3_512值为：')
+                value = value+"\n\n"
+                self.te.insert(13.0,value)
+            self.te.insert(14.0,'------------结束-------------\n')
+            self.te.insert(15.0, before)
         if typ == 2:
             if name != '':
+                self.te.insert(1.0,"---------------"+str(name)+"计算结果----------------\n")
                 if a == 1:
                     value=Md5(typ,name)
-                    value = value+"\n"
-                    self.te.insert(1.0,value)
+                    self.te.insert(2.0,'MD5值为：')
+                    value = value+"\n\n"
+                    self.te.insert(3.0,value)
                 if b == 1:
                     value=Sha1(typ,name)
-                    value = value+"\n"
-                    self.te.insert(2.0,value)
+                    self.te.insert(4.0,'SHA1值为：')
+                    value = value+"\n\n"
+                    self.te.insert(5.0,value)
                 if c == 1:
                     value=Sha256(typ,name)
-                    value = value+"\n"
-                    self.te.insert(3.0,value)
+                    self.te.insert(6.0,'SHA256值为：')
+                    value = value+"\n\n"
+                    self.te.insert(7.0,value)
                 if d == 1:
                     value=Sha512(typ,name)
-                    value = value+"\n"
-                    self.te.insert(4.0,value)
+                    self.te.insert(8.0,'SHA512值为：')
+                    value = value+"\n\n"
+                    self.te.insert(9.0,value)
                 if e == 1:
                     value=Sha3256(typ,name)
-                    value = value+"\n"
-                    self.te.insert(5.0,value)
+                    self.te.insert(10.0,'SHA3_256值为：')
+                    value = value+"\n\n"
+                    self.te.insert(11.0,value)
                 if f == 1:
                     value=Sha3512(typ,name)
+                    self.te.insert(12.0,'SHA3_512值为：')
                     value = value+"\n"
-                    self.te.insert(6.0,value)
+                    self.te.insert(13.0,value)
+                self.te.insert(14.0,'------------结束-------------\n')
+                self.te.insert(15.0, before)
+        self.te.config(state=DISABLED)
     def function2(self):
         filename = tkinter.filedialog.askopenfilename()
         if filename != '':
             global name
             name = filename
             self.all_alg2.config(text=name)
-
-
     def function3(self):
-        global algg,direction,upwd
-
-        if self.iv_alg.get()==1:
-            algg= "1"
-            self.all_alg.config(text='AES256-GCM')
-        elif self.iv_alg.get()==2:
-            algg= "2"
-            self.all_alg.config(text='xChaCha20-Poly1305')
-
-        if self.iv_direction.get()==1:
-            direction = "1"
-            self.all_direction.config(text='Encrypt')
-        elif self.iv_direction.get()==2:
-            direction = "2"
-            self.all_direction.config(text='Decrypt')
-
-        self.all_password.config(text=self.rb_password1.get())
-        upwd=self.rb_password1.get()
-        self.all_file.config(text=name)
+        self.te.config(state=NORMAL)
+        self.te.delete(1.0,END)
+        self.te.config(state=DISABLED)
 if __name__ == '__main__':
     radiobutton()
