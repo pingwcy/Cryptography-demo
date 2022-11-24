@@ -14,51 +14,51 @@ class radiobutton:
     def __init__(self):
         self.root = Tk()
         self.root.title("Sloth Encryption")  # 设置窗口标题
-        self.root.geometry("900x500")  # 设置窗口大小 注意：是x 不是*
+        self.root.geometry("1024x510")  # 设置窗口大小 注意：是x 不是*
         '''单选框样式'''
         # 算法选择
         self.iv_alg = IntVar()
-        self.rb_alg_Label = Label(self.root, text='Chose algorithm：')
-        self.rb_alg1 = Radiobutton(self.root, text='AES256-GCM', value=1, variable=self.iv_alg)
-        self.rb_alg2 = Radiobutton(self.root, text='xChaCha20-Poly1305', value=2, variable=self.iv_alg)
+        self.rb_alg_Label = Label(self.root, text='Chose algorithm：',font=('微软雅黑', 12,'bold'))
+        self.rb_alg1 = Radiobutton(self.root, text='AES256-GCM',font=('微软雅黑', 12,'bold'),value=1, variable=self.iv_alg)
+        self.rb_alg2 = Radiobutton(self.root, text='xChaCha20-Poly1305', value=2, variable=self.iv_alg,font=('微软雅黑', 12,'bold'))
         #iv_alg.set(1)
         # 加密解密方向选择
         self.iv_direction = IntVar()
-        self.rb_direction_Label = Label(self.root, text='En/Decrypt：')
-        self.rb_direction1 = Radiobutton(self.root, text='Encrypt', value=1, variable=self.iv_direction)
-        self.rb_direction2 = Radiobutton(self.root, text='Decrypt', value=2, variable=self.iv_direction)
+        self.rb_direction_Label = Label(self.root, text='En/Decrypt：',font=('微软雅黑', 12,'bold'))
+        self.rb_direction1 = Radiobutton(self.root, text='Encrypt', value=1, variable=self.iv_direction,font=('微软雅黑', 12,'bold'))
+        self.rb_direction2 = Radiobutton(self.root, text='Decrypt', value=2, variable=self.iv_direction,font=('微软雅黑', 12,'bold'))
         #iv_direction.set(1)
 
         # 密码输入
         self.iv_password = IntVar()
-        self.rb_password_Label = Label(self.root, text='Enter or set password：')
+        self.rb_password_Label = Label(self.root, text='Enter or set password：',font=('微软雅黑', 12,'bold'))
         self.rb_password1 = Entry(self.root,width=80)
         # 文件选择器
         self.iv_file = IntVar()
-        self.rb_file_Label = Label(self.root, text='Chose a file to en/decrypt：')
-        self.rb_file = Button(self.root, text='Browse', command=self.function2)
+        self.rb_file_Label = Label(self.root, text='Chose a file to en/decrypt：',font=('微软雅黑', 12,'bold'))
+        self.rb_file = Button(self.root, text='Browse', command=self.function2,font=('微软雅黑', 12,'bold'))
         #提交参数
         self.iv_ok = IntVar()
-        self.save = Button(self.root, text='Save settings', command=self.function3)
+        self.save = Button(self.root, text='Save settings', command=self.function3,font=('微软雅黑', 12,'bold'))
         # 启动按钮
         self.iv_start = IntVar()
-        self.rb_start = Button(self.root, text='Start',  state=DISABLED, command=self.function1)
+        self.rb_start = Button(self.root, text='Start',  state=DISABLED, command=self.function1,font=('微软雅黑', 12,'bold'))
         # 哈希工具
         self.showinfo = IntVar()
-        self.info = Text(self.root,height=8,width=70,font=('微软雅黑', 15,'bold'))
+        self.info = Text(self.root,height=8,width=78,font=('微软雅黑', 12,'bold'))
         #总结标签
         self.iv_all1= IntVar()
-        self.all_alg1 = Label(self.root, text='Algorithm： ')
-        self.all_direction1 = Label(self.root, text='En/Decrypt： ')
-        self.all_password1 = Label(self.root, text='Password： ')
-        self.all_file1 = Label(self.root, text='File Name： ')
+        self.all_alg1 = Label(self.root, text='Algorithm： ',font=('微软雅黑', 12,'bold'))
+        self.all_direction1 = Label(self.root, text='En/Decrypt： ',font=('微软雅黑', 12,'bold'))
+        self.all_password1 = Label(self.root, text='Password： ',font=('微软雅黑', 12,'bold'))
+        self.all_file1 = Label(self.root, text='File Name： ',font=('微软雅黑', 12,'bold'))
 
         #总结内容
         self.iv_all = IntVar()
-        self.all_alg = Label(self.root, text='None')
-        self.all_direction = Label(self.root, text='')
-        self.all_password = Label(self.root, text='')
-        self.all_file = Label(self.root, text='')
+        self.all_alg = Label(self.root, text='None',font=('微软雅黑', 12,'bold'))
+        self.all_direction = Label(self.root, text='',font=('微软雅黑', 12,'bold'))
+        self.all_password = Label(self.root, text='',font=('微软雅黑', 12,'bold'))
+        self.all_file = Label(self.root, text='',font=('微软雅黑', 12,'bold'))
         self.bar = tkinter.ttk.Progressbar(self.root,length=860)
         self.bar['maximum'] = 1000
         self.bar['value'] = 0
@@ -93,8 +93,8 @@ class radiobutton:
         self.rb_start.grid(row=40, column=1, sticky='W')
         self.save.grid(row=40, column=2, sticky='W')
 
-        self.info.grid(row=41,column=0,columnspan=19,sticky='E')
-        self.bar.grid(row=42,column=0,columnspan=99,sticky='E')
+        self.info.grid(row=41,column=0,columnspan=19,sticky='N')
+        self.bar.grid(row=42,column=0,columnspan=99,sticky='N')
         self.root.mainloop()
     def getfilesalt(self,filename):
         try:
@@ -113,6 +113,7 @@ class radiobutton:
         fsize = os.path.getsize(filename)
         BUFFER_SIZE = 1024 * 1024  # The size in bytes that we read, encrypt and write to at once
         rounds = round(fsize/BUFFER_SIZE)
+        if rounds<1: rounds=rounds+1
         progress1=0
         self.bar['value']=0
 
@@ -160,7 +161,7 @@ class radiobutton:
         rounds = round(fsize/BUFFER_SIZE)
         progress1=0
         self.bar['value']=0
-
+        if rounds<1: rounds=rounds+1
 # Open files
         file_in = open(input_filename, 'rb')
         file_out = open(output_filename, 'wb')
@@ -216,7 +217,7 @@ class radiobutton:
         rounds = round(fsize/BUFFER_SIZE)
         progress1=0
         self.bar['value']=0
-
+        if rounds<1: rounds=rounds+1
 # Open files
         file_in = open(input_filename, 'rb')  # rb = read bytes. Required to read non-text files
         file_out = open(output_filename, 'wb')  # wb = write bytes. Required to write the encrypted data
@@ -253,7 +254,7 @@ class radiobutton:
         rounds = round(fsize/BUFFER_SIZE)
         progress1=0
         self.bar['value']=0
-
+        if rounds<1: rounds=rounds+1
 # Open files
         file_in = open(input_filename, 'rb')
         file_out = open(output_filename, 'wb')
