@@ -3,6 +3,8 @@ import hashlib
 from tkinter import *
 import tkinter.filedialog
 import tkinter.ttk
+import pyperclip
+import tkinter.messagebox
 
 class radiobutton:
     global chunk_size
@@ -11,8 +13,8 @@ class radiobutton:
     def __init__(self):
         root = Tk()
         root.title("树懒哈希计算器")  # 设置窗口标题
-        root.geometry("1100x700")  # 设置窗口大小
-
+        root.geometry("1100x750")  # 设置窗口大小
+        #root.resizable(0,0)
         # 选择哈希算法
         self.CheckVar1 = IntVar()
         self.CheckVar2 = IntVar()
@@ -62,6 +64,7 @@ class radiobutton:
         # 启动按钮和清空按钮
         self.iv_start = IntVar()
         self.rb_start = Button(root, text='开始计算', font=('微软雅黑', 15,'bold'), command=self.function1)
+        self.rb_copy = Button(root, text='复制到剪切板', font=('微软雅黑', 15,'bold'), command=self.function95)
         self.clean = Button(root,text='清空输出框', font=('微软雅黑', 15,'bold'), command=self.function3)
         #总结标签
         self.te = Text(root,height=18,width=120,font=('微软雅黑', 10,'bold'),state=DISABLED)
@@ -103,6 +106,7 @@ class radiobutton:
         self.all_alg4.grid(row=8, column=1, columnspan=99, sticky='W')
 
         self.rb_start.grid(row=9, column=4, sticky='W')
+        self.rb_copy.grid(row=12, column=5, sticky='N')
         self.clean.grid(row=9, column=2, sticky='W')
         self.check.grid(row=9,column=0,columnspan=2,sticky='E')
 
@@ -479,5 +483,12 @@ class radiobutton:
         self.check10.config(state=DISABLED)
     def function200(self):
         self.check10.config(state=NORMAL)
+    def function95(self):
+        try:
+            pyperclip.copy(self.te.get(1.0,END))
+            tkinter.messagebox.showinfo("成功","成功复制到剪切板")
+        except:
+            tkinter.messagebox.showinfo("失败","复制失败，可能是没有权限")
+
 if __name__ == '__main__':
     radiobutton()
