@@ -1,6 +1,6 @@
-# Encryption-Technology-Starter
-Hello, This is a beginner's exercise on encryption and security techniques.
-I currently have three exercises,
+# Cryptography-demo
+Hello, This is a demo of encryption cryptography tools.
+I currently have three demos,
 The first is AES-GCM and xChaCha20-Poly1305, using scrypt as the key derivation function. Encrypt and decrypt files. A graphical interface has been made, the original console interface is outdated, and a new console interface version will be developed in the future. Also, the earlier cluttered way of writing has been abandoned and put into the archive folder.
 The second is RSA encryption for short message encryption, as well as signatures. It is currently a console interface, and a graphical interface will be developed in the future.
 The third is the common hash calculator for strings and files. A graphical interface was made. But don't plan to make a console interface, the console interface is not user-friendly to calculate the hash value.
